@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 
 /** Add your docs here. */
@@ -24,7 +25,7 @@ public class FieldDriverStick {
             output = 0;
         }
 
-        return output;
+        return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
 
     public double getY(){
@@ -35,7 +36,7 @@ public class FieldDriverStick {
             output = 0;
         }
 
-        return output;
+        return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
 
     public double getZ(){
@@ -46,6 +47,6 @@ public class FieldDriverStick {
             output = 0;
         }
         
-        return output;
+        return output * DriveConstants.kMaxAngularSpeedRadiansPerSecond;
     }
 }

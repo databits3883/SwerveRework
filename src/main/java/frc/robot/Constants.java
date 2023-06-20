@@ -22,19 +22,20 @@ public final class Constants {
   public static final class DriveConstants {
     public static final int kGyroPort = 14;
     public static final double kGyroFront = 180;
+    public static final double kTopSpeed = 4.267;
 
-    public static final int kFrontLeftDriveMotorPort = 4;
-    public static final int kRearLeftDriveMotorPort = 6;
-    public static final int kFrontRightDriveMotorPort = 2;
-    public static final int kRearRightDriveMotorPort = 8;
+    public static final int kFrontLeftDriveMotorPort = 3;
+    public static final int kRearLeftDriveMotorPort = 5;
+    public static final int kFrontRightDriveMotorPort = 1;
+    public static final int kRearRightDriveMotorPort = 7;
 
-    public static final int kFrontLeftTurningMotorPort = 3;
-    public static final int kRearLeftTurningMotorPort = 5;
-    public static final int kFrontRightTurningMotorPort = 1;
-    public static final int kRearRightTurningMotorPort = 7;
+    public static final int kFrontLeftTurningMotorPort = 4;
+    public static final int kRearLeftTurningMotorPort = 6;
+    public static final int kFrontRightTurningMotorPort = 2;
+    public static final int kRearRightTurningMotorPort = 8;
 
-    public static final int kFrontLeftCANCoderPort = 10;
-    public static final int kRearLeftCANCoderPort = 11;
+    public static final int kFrontLeftCANCoderPort = 11;
+    public static final int kRearLeftCANCoderPort = 10;
     public static final int kFrontRightCANCoderPort = 9;
     public static final int kRearRightCANCoderPort = 12;
 
@@ -53,7 +54,7 @@ public final class Constants {
     public static final double kWheelBase = 0.38;
     // Distance between front and back wheels on robot
 
-    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = 4.267;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;

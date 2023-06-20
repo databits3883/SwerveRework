@@ -36,7 +36,7 @@ public class RobotContainer {
 
   JoystickButton m_calibrateButton = new JoystickButton(m_driverController, 8);
 
-  PathPlannerTrajectory path = PathPlanner.loadPath("New Path", 1, 1);
+  PathPlannerTrajectory path = PathPlanner.loadPath("Froggy Demo Path", 1, 1);
   
 
   
