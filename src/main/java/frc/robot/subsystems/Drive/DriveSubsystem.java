@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Drive;
 
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -14,6 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import frc.robot.Constants.DriveConstants;
@@ -46,7 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearRightCANCoderPort);
 
   // The gyro sensor
-  private final Pigeon2 m_gyro = new Pigeon2(DriveConstants.kGyroPort);
+  private final AHRS m_gyro = new AHRS(Port.kMXP);
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry =
@@ -165,12 +167,14 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.calibrateTurnEncoders();
     m_rearRight.calibrateTurnEncoders();
 
-    m_gyro.setYaw(DriveConstants.kGyroFront);
+    m_gyro.zeroYaw();
+    //m_gyro.setYaw(DriveConstants.kGyroFront);
   }
 
   /** Zeroes the heading of the robot. */
   public void zeroHeading() {
-    m_gyro.setYaw(DriveConstants.kGyroFront);
+    //m_gyro.setYaw(DriveConstants.kGyroFront);
+    m_gyro.zeroYaw();
   }
 
   /**
