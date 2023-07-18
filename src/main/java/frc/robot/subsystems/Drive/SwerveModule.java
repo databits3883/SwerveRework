@@ -63,6 +63,7 @@ public class SwerveModule {
     m_drivePIDController.setD(ModuleConstants.kDModuleDriveController);
     m_drivePIDController.setFF(ModuleConstants.kFFModuleDriveController);
     m_drivePIDController.setFeedbackDevice(m_driveEncoder);
+    m_drivePIDController.setOutputRange(-1, 1);
 
 
     m_turningEncoder = m_turningMotor.getEncoder();
@@ -103,6 +104,7 @@ public class SwerveModule {
     //m_turningPIDController.setI(0);
     m_turningPIDController.setD(0);
     m_turningPIDController.setFF(0);
+    m_turningPIDController.setOutputRange(-1, 1);
 
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Abs Turn Encoder ",  ()->m_calibrateCANCoder.getAbsolutePosition());
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Turn Encoder ",  ()->m_turningEncoder.getPosition());

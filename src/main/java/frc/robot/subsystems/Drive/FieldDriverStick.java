@@ -12,6 +12,7 @@ import frc.robot.Constants.OIConstants;
 public class FieldDriverStick {
 
     Joystick m_Joystick;
+    public double oldXInput = 0, oldYInput = 0;
 
     public FieldDriverStick(Joystick joystick){
         m_Joystick = joystick;
@@ -20,22 +21,28 @@ public class FieldDriverStick {
     public double getX(){
         double output = m_Joystick.getY();
         //output *= -1;
+        output = ReduceDecceleration(output, oldXInput);
         output = Math.pow(output, OIConstants.kDriveStickPower) * Math.signum(output);
         if(Math.abs(output) < 0.05){
             output = 0;
         }
 
+        output = ReduceDecceleration(output, oldXInput);
+        oldXInput = output;
         return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
 
     public double getY(){
         double output = m_Joystick.getX();
         //output *= -1;
+        
         output = Math.pow(output, OIConstants.kDriveStickPower) * Math.signum(output);
         if(Math.abs(output) < 0.05){
             output = 0;
         }
 
+        output = ReduceDecceleration(output, oldYInput);
+        oldYInput = output;
         return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
 
@@ -48,5 +55,16 @@ public class FieldDriverStick {
         }
         
         return output * DriveConstants.kMaxAngularSpeedRadiansPerSecond;
+    }
+
+    public double ReduceDecceleration(double newInput, double oldInput){
+        double output = 0;
+        if (Math.abs(newInput) < Math.abs(oldInput)){
+            output = oldInput + 0.1 * (newInput - oldInput);;
+        }
+        else{
+            output = newInput;
+        }
+        return output;
     }
 }
