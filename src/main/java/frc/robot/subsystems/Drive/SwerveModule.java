@@ -108,7 +108,7 @@ public class SwerveModule {
 
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Abs Turn Encoder ",  ()->m_calibrateCANCoder.getAbsolutePosition());
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Turn Encoder ",  ()->m_turningEncoder.getPosition());
-    Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Drive Encoder ",  ()->m_driveEncoder.getPosition());
+    Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Drive Encoder Velocity ",  ()->m_driveEncoder.getVelocity());
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Drive Encoder Rot",  ()->m_driveEncoder.getPosition()/m_driveEncoder.getPositionConversionFactor());
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Drive Goal",  ()->driveGoal);
     Shuffleboard.getTab("Debug").addDouble(m_driveMotor.getDeviceId() + " Turn Goal ",  ()->turnGoal);
@@ -146,7 +146,7 @@ public class SwerveModule {
     // Optimize the reference state to avoid spinning further than 90 degrees
     SwerveModuleState state =
         SwerveModuleState.optimize(desiredState, Rotation2d.fromRotations(m_turningEncoder.getPosition()));
-        turnGoal = state.angle.getDegrees();
+        turnGoal = state.angle.getRotations();
         driveGoal = state.speedMetersPerSecond;
         
         //System.out.println(state);
@@ -160,7 +160,7 @@ public class SwerveModule {
     //turnOutput = m_turningPIDController.calculate(m_turningEncoder.getPosition(), state.angle.getRotations());
     //m_turningMotor.set(turnOutput);
     m_turningPIDController.setReference(state.angle.getRotations(), ControlType.kPosition);
-    turnGoal = state.angle.getRotations();
+    //turnGoal = state.angle.getRotations();
       //double normalizedDriveOutput = Math.min(Math.max(driveOutput, -0.1), 0.1);
       //drivePIDOutput = normalizedDriveOutput;
     // Calculate the turning motor output from the turning PID controller.

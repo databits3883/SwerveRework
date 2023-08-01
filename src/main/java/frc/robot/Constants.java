@@ -113,8 +113,8 @@ public final class Constants {
         // Assumes the encoders are on a 1:1 reduction with the module shaft.
         (kTurningGearRatio);
 
-    public static final double kPModuleTurningController = 6;
-    public static final double kIModuleTurningController = 0.01;
+    public static final double kPModuleTurningController = 1.2;
+    public static final double kIModuleTurningController = 0.0;
 
     public static final double kPModuleDriveController = 0.22;
     public static final double kIModuleDriveController = 0;
