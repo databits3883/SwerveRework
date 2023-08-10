@@ -16,6 +16,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -48,6 +50,8 @@ public class DriveSubsystem extends SubsystemBase {
   // The gyro sensor
   private final AHRS m_gyro = new AHRS(Port.kMXP);
 
+  private final SendableChooser<Double> speedLimiter = new SendableChooser<Double>();
+
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry =
       new SwerveDriveOdometry(
@@ -68,6 +72,10 @@ public class DriveSubsystem extends SubsystemBase {
     calibrate();
     Shuffleboard.getTab("Debug").add("Odometry(Y is inverted)", m_fieldPose);
     Shuffleboard.getTab("Debug").addDouble("Gyro Yaw", () -> m_gyro.getYaw());
+    speedLimiter.setDefaultOption("Really Safe Speed", 0.1);
+    speedLimiter.addOption("Safe Speed", 0.3);
+    speedLimiter.addOption("Full Speed", 1d);
+    SmartDashboard.putData(speedLimiter);
     
   }
 
@@ -143,8 +151,11 @@ public class DriveSubsystem extends SubsystemBase {
    * @param desiredStates The desired SwerveModule states.
    */
   public void setModuleStates(SwerveModuleState[] desiredStates) {
+
     SwerveDriveKinematics.desaturateWheelSpeeds(
-        desiredStates, DriveConstants.kMaxSpeedMetersPerSecond);
+    desiredStates, DriveConstants.kMaxSpeedMetersPerSecond * speedLimiter.getSelected());
+    
+    
     m_frontLeft.setDesiredState(desiredStates[0]);
     m_frontRight.setDesiredState(desiredStates[1]);
     m_rearLeft.setDesiredState(desiredStates[2]);
