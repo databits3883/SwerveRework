@@ -74,6 +74,7 @@ public class DriveSubsystem extends SubsystemBase {
     Shuffleboard.getTab("Debug").addDouble("Gyro Yaw", () -> m_gyro.getYaw());
     speedLimiter.setDefaultOption("Really Safe Speed", 0.1);
     speedLimiter.addOption("Safe Speed", 0.3);
+    speedLimiter.addOption("Kinda Safe Speed", 0.6);
     speedLimiter.addOption("Full Speed", 1d);
     SmartDashboard.putData(speedLimiter);
     

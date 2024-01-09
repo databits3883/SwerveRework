@@ -21,13 +21,13 @@ public class FieldDriverStick {
     public double getX(){
         double output = m_Joystick.getY();
         //output *= -1;
-        output = ReduceDecceleration(output, oldXInput);
+        //output = ReduceDecceleration(output, oldXInput);
         output = Math.pow(output, OIConstants.kDriveStickPower) * Math.signum(output);
         if(Math.abs(output) < 0.05){
             output = 0;
         }
 
-        output = ReduceDecceleration(output, oldXInput);
+        //output = ReduceDecceleration(output, oldXInput);
         oldXInput = output;
         return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
@@ -41,7 +41,7 @@ public class FieldDriverStick {
             output = 0;
         }
 
-        output = ReduceDecceleration(output, oldYInput);
+        //output = ReduceDecceleration(output, oldYInput);
         oldYInput = output;
         return output * DriveConstants.kMaxSpeedMetersPerSecond;
     }
